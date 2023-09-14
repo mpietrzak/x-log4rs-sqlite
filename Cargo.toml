@@ -5,6 +5,7 @@ edition = "2021"
 license = "MIT/Apache-2.0"
 authors = ["Maciej Pietrzak <mp@typesafe.org>"]
 keywords = ["log", "logger", "logging"]
+description = "Experimental log4rs appender that saves logs in SQLite database"
 
 [dependencies]
 anyhow = "^1"
