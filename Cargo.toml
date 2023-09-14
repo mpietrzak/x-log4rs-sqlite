@@ -1,5 +1,5 @@
 [package]
-name = "x-log4rs-log4rs"
+name = "x-log4rs-sqlite"
 version = "0.0.1"
 edition = "2021"
 license = "MIT/Apache-2.0"
