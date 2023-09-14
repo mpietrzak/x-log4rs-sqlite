@@ -1,0 +1,12 @@
+[package]
+name = "x-log4rs-log4rs"
+version = "0.0.1"
+edition = "2021"
+
+[dependencies]
+anyhow = "^1"
+chrono = "^0.4.30"
+log = "^0.4"
+log4rs = "^1"
+rusqlite = "^0.29.0"
+serde = "^1"
