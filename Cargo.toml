@@ -1,6 +1,6 @@
 [package]
 name = "x-log4rs-sqlite"
-version = "0.0.1"
+version = "0.0.2"
 edition = "2021"
 license = "MIT/Apache-2.0"
 authors = ["Maciej Pietrzak <mp@typesafe.org>"]
@@ -15,3 +15,4 @@ log = "^0.4"
 log4rs = "^1"
 rusqlite = "^0.29.0"
 serde = "^1"
+uuid = { features = ["fast-rng", "v4"], version = "^1.4.1" }

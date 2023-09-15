@@ -9,6 +9,7 @@ struct SqliteLogAppender {
 }
 
 struct LogRecord {
+    id: String,
     level: String,
     ts: String,
     message: String,
@@ -24,6 +25,7 @@ impl SqliteLogAppender {
     }
     fn create_entry_table_if_not_exists(conn: &rusqlite::Connection) -> anyhow::Result<()> {
         let table_sql = "create table if not exists entry (
+            id varchat(128) not null primary key,
             ts varchar(128) not null,
             level varchar(128) not null,
             message varchar(8192) not null
@@ -50,9 +52,9 @@ impl SqliteLogAppender {
         let tx = conn.transaction()?;
         {
             let mut stmt =
-                tx.prepare("insert into entry (ts, level, message) values (?1, ?2, ?3)")?;
+                tx.prepare("insert into entry (id, ts, level, message) values (?1, ?2, ?3, ?4)")?;
             for lr in buf_lock.iter() {
-                stmt.execute([&lr.ts, &lr.level, &lr.message])?;
+                stmt.execute([&lr.id, &lr.ts, &lr.level, &lr.message])?;
             }
         }
         tx.commit()?;
@@ -73,6 +75,7 @@ impl std::fmt::Debug for SqliteLogAppender {
 impl log4rs::append::Append for SqliteLogAppender {
     fn append(&self, record: &log::Record) -> anyhow::Result<()> {
         let lr = LogRecord {
+            id: uuid::Uuid::new_v4().to_string(),
             level: record.level().as_str().to_string(),
             ts: chrono::Utc::now()
                 .format("%Y-%m-%d %H:%M:%S%.6f")
