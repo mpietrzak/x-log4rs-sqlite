@@ -25,7 +25,7 @@ impl SqliteLogAppender {
     }
     fn create_entry_table_if_not_exists(conn: &rusqlite::Connection) -> anyhow::Result<()> {
         let table_sql = "create table if not exists entry (
-            id varchat(128) not null primary key,
+            id varchar(128) not null primary key,
             ts varchar(128) not null,
             level varchar(128) not null,
             message varchar(8192) not null
